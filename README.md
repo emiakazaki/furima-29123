@@ -1,24 +1,65 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## users テーブル
 
-* Ruby version
+| Column          | Type   | Options     |
+| --------------- | ------ | ----------- |
+| name            | string | null: false |
+| email           | string | null: false |
+| password        | string | null: false |
+| birthday        | string | null: false |
+| first name      | string | null: false |
+| last name       | string | null: false |
+| first name_kana | string | null: false |
+| last name_kana  | string | null: false |
 
-* System dependencies
+### Association
+- has_many :items
+- has_one :order
 
-* Configuration
+## items テーブル
 
-* Database creation
+| Column          | Type   | Options     |
+| --------------- | ------ | ----------- |
+| image           | string | null: false |
+| text            | string | null: false |
+| price           | string | null: false |
+| delivery free   | string | null: false |
+| state           | string | null: false |
+| category        | string | null: false |
+| ship from       | string | null: false |
+| delivery time   | string | null: false |
+| user_id         | string | null: false |
 
-* Database initialization
+### Association
+- has_one :order
+- belongs_to :user
 
-* How to run the test suite
+## orders テーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+| Column          | Type   | Options     |
+| --------------- | ------ | ----------- |
+| user_id         | string | null: false |
+| item_id         | string | null: false |
 
-* Deployment instructions
+### Association
+- belongs_to :user
+- belongs_to :item
+- has_one :address
 
-* ...
+## addresses テーブル
+
+| Column          | Type   | Options     |
+| --------------- | ------ | ----------- |
+| postal code     | string | null: false |
+| prefecture      | string | null: false |
+| municipality    | string | null: false |
+| address         | string | null: false |
+| building name   | string | null: false |
+| tel             | string | null: false |
+| order_id        | string | null: false |
+
+### Association
+- belongs_to : order
