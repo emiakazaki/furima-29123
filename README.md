@@ -17,7 +17,7 @@
 
 ### Association
 - has_many :items
-- has_many :order
+- has_many :orders
 
 ## items テーブル
 
@@ -31,7 +31,7 @@
 | category_id     | integer | null: false |
 | prefecture_id   | integer | null: false |
 | time_id         | integer | null: false |
-| user_id         | integer | null: false |
+| user_id         | integer | null: false, foreign_key: true|
 
 ### Association
 - has_one :order
@@ -39,10 +39,10 @@
 
 ## orders テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| user_id         | integer | null: false |
-| item_id         | integer | null: false |
+| Column          | Type    | Options                       |
+| --------------- | ------- | ----------------------------- |
+| user_id         | integer | null: false, foreign_key: true|
+| item_id         | integer | null: false, foreign_key: true|
 
 ### Association
 - belongs_to :user
@@ -59,7 +59,7 @@
 | address         | string  | null: false |
 | building_name   | string  |             |
 | tel             | string  | null: false |
-| order_id        | integer | null: false |
+| order_id        | integer | null: false, foreign_key: true|
 
 ### Association
 - belongs_to : order
