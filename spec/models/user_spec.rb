@@ -3,12 +3,16 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
 describe 'ユーザー新規登録' do
 
-    before do
-      @user = FactoryBot.build(:user)
-    end
+before do
+  @user = FactoryBot.build(:user)
+end
+
 context 'ユーザー登録ができる時' do
 
+  it "全ての項目が存在すれば登録できる" do
+    expect(@user).to be_valid
   end
+
 context 'ユーザー登録ができない時' do
 
     it "nicknameが空では登録できないこと" do
@@ -57,6 +61,14 @@ context 'ユーザー登録ができない時' do
       expect(@user.errors.full_messages).to include("Email is invalid")
     end
 
+    it "email:一意性であること（重複したメールアドレスでは登録できないこと）" do
+      @user.save
+      another_user = FactoryBot.build(:user)
+      another_user.email = @user.email
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
+     end
+
     it "passwordが空では登録できないこと" do
       @user.password = nil
       @user.valid?
@@ -70,7 +82,7 @@ context 'ユーザー登録ができない時' do
     end
 
     it "password:半角数字のみでは登録できないこと" do
-      @user.password = '1a1a1a'
+      @user.password = '00000000'
       @user.valid?
       expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
     end
@@ -119,5 +131,6 @@ context 'ユーザー登録ができない時' do
       expect(@user.errors.full_messages).to include("Password is too short (minimum is 6 characters)")
     end
   end
+end
 end
 end
