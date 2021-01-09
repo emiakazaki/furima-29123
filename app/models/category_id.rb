@@ -1,4 +1,3 @@
-extend ActiveHash::Associations::ActiveRecordExtensions
 class CategoryId < ActiveHash::Base
 
   self.data = [
@@ -14,4 +13,8 @@ class CategoryId < ActiveHash::Base
                {id: 9, name: 'ハンドメイド'},
                {id: 10, name: 'その他'}
                ]
+
+include ActiveHash::Associations
+has_many :items
+
 end

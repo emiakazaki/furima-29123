@@ -1,4 +1,3 @@
-extend ActiveHash::Associations::ActiveRecordExtensions
 class FeeId < ActiveHash::Base
 
   self.data = [
@@ -7,4 +6,6 @@ class FeeId < ActiveHash::Base
                {id: 2, name: '送料込み(出品者様負担)'}
               ]
 
+  include ActiveHash::Associations
+  has_many :items
 end

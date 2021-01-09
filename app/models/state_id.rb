@@ -1,4 +1,3 @@
-extend ActiveHash::Associations::ActiveRecordExtensions
 class StateId < ActiveHash::Base
 
   self.data = [
@@ -10,4 +9,8 @@ class StateId < ActiveHash::Base
                {id: 5, name: '傷や汚れ有り'},
                {id: 6, name: '全体的に状態が悪い'}
                ]
+
+include ActiveHash::Associations
+has_many :items
+
 end
