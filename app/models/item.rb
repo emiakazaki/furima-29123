@@ -2,8 +2,8 @@ class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
 
   has_one_attached :image
-  validates :text, presence: true
-  validates :image, presence: true
+  
+
 
   has_one :order
   belongs_to :user
@@ -15,7 +15,7 @@ class Item < ApplicationRecord
 
   with_options presence: true do
   #空の投稿を保存できないようにする(わかりやすいように記入しています)
-  validates :product_name, :text, :price, presence: true
+  validates :product_name, :text, :price,:image, presence: true
   #ジャンルの選択が「--」の時は保存できないようにする(わかりやすいように記入しています)
   validates :scheduled_delivery_id, numericality: { other_than: 0 }
   validates :fee_id, numericality: { other_than: 0 }

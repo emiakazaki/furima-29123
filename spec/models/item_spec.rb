@@ -40,31 +40,31 @@ context '出品できる時' do
   end
 
   it "category_idが選択されてないと登録できないこと" do
-    @item.category_id = "0"
+    @item.category_id = 0
     @item.valid?
     expect(@item.errors.full_messages).to include("Category must be other than 0")
   end
 
   it "state_idが空では登録できないこと" do
-    @item.state_id = "0"
+    @item.state_id = 0
     @item.valid?
     expect(@item.errors.full_messages).to include("State must be other than 0")
   end
 
   it "fee_idが空では登録できないこと" do
-    @item.fee_id = "0"
+    @item.fee_id = 0
     @item.valid?
     expect(@item.errors.full_messages).to include("Fee must be other than 0")
   end
 
   it "prefecture_idが空では登録できないこと" do
-    @item.prefecture_id = "0"
+    @item.prefecture_id = 0
     @item.valid?
     expect(@item.errors.full_messages).to include("Prefecture must be other than 0")
   end
 
   it "scheduled_delivery_idが空では登録できないこと" do
-    @item.scheduled_delivery_id = "0"
+    @item.scheduled_delivery_id = 0
     @item.valid?
     expect(@item.errors.full_messages).to include("Scheduled delivery must be other than 0")
   end
@@ -81,6 +81,18 @@ context '出品できる時' do
   end
   it 'priceが9,999,999円を超過すると保存できないこと' do
     @item.price = 10000000
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Price is invalid")
+  end
+
+  it 'priceが半角英数字混合では出品できないこと' do
+    @item.price = "2ppp0"
+    @item.valid?
+    expect(@item.errors.full_messages).to include("Price is invalid")
+  end
+
+  it 'priceが半角英字のみでは出品できないこと' do
+    @item.price = "aaaaaa"
     @item.valid?
     expect(@item.errors.full_messages).to include("Price is invalid")
   end
