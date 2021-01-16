@@ -1,4 +1,4 @@
-class FeeId < ActiveHash::Base
+class Fee < ActiveHash::Base
 
   self.data = [
                {id: 0, name: '---'},

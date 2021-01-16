@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2021_01_09_022658) do
     t.integer "state_id"
     t.integer "category_id"
     t.integer "prefecture_id"
-    t.integer "time_id"
+    t.integer "scheduled_delivery_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

@@ -8,7 +8,7 @@ class CreateItems < ActiveRecord::Migration[6.0]
       t.integer :state_id
       t.integer :category_id
       t.integer :prefecture_id
-      t.integer :time_id
+      t.integer :scheduled_delivery_id
       t.integer :user_id,foreign_key: true
       t.timestamps
     end

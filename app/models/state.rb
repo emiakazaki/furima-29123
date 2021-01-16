@@ -1,4 +1,4 @@
-class StateId < ActiveHash::Base
+class State < ActiveHash::Base
 
   self.data = [
                {id: 0, name: '---'},

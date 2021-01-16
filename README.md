@@ -21,17 +21,17 @@
 
 ## items テーブル
 
-| Column          | Type    | Options     |
-| --------------- | ------- | ----------- |
-| product_name    | string  | null: false |
-| text            | text    | null: false |
-| price           | integer | null: false |
-| fee_id          | integer | null: false |
-| state_id        | integer | null: false |
-| category_id     | integer | null: false |
-| prefecture_id   | integer | null: false |
-| time_id         | integer | null: false |
-| user_id         | integer | null: false, foreign_key: true|
+| Column               | Type    | Options     |
+| -------------------- | ------- | ----------- |
+| product_name         | string  | null: false |
+| text                 | text    | null: false |
+| price                | integer | null: false |
+| fee_id               | integer | null: false |
+| state_id             | integer | null: false |
+| category_id          | integer | null: false |
+| prefecture_id        | integer | null: false |
+| scheduled_delivery_id| integer | null: false |
+| user_id              | integer | null: false, foreign_key: true|
 
 ### Association
 - has_one :order
