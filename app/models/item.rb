@@ -15,13 +15,14 @@ class Item < ApplicationRecord
 
   with_options presence: true do
   #空の投稿を保存できないようにする(わかりやすいように記入しています)
-  validates :product_name, :text, :price,:image, presence: true
+  validates :product_name, :text, :price,:image
   #ジャンルの選択が「--」の時は保存できないようにする(わかりやすいように記入しています)
-  validates :scheduled_delivery_id, numericality: { other_than: 0 }
-  validates :fee_id, numericality: { other_than: 0 }
-  validates :state_id, numericality: { other_than: 0 }
-  validates :category_id, numericality: { other_than: 0 }
-  validates :prefecture_id, numericality: { other_than: 0 }
+  with_options numericality: { other_than: 0 }
+  validates :scheduled_delivery_id
+  validates :fee_id
+  validates :state_id
+  validates :category_id
+  validates :prefecture_id
   end
   validates :price, format: { with: /\A[a-z0-9]+\z/i, message: "には半角数字のみ入力してください。"} 
   validates :price, presence: true, numericality: {only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is invalid"} 
