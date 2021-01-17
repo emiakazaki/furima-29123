@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: furima_29123_production
-  username: furima_29123
+  username: root
   password: <%= ENV['FURIMA_29123_DATABASE_PASSWORD'] %>
