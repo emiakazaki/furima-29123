@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   
   with_options presence: true do
     #空の投稿を保存できないようにする(わかりやすいように記入しています)
-    validates :product_name, :text, :price,:image
+    validates :product_name, :text, :image
     #ジャンルの選択が「--」の時は保存できないようにする(わかりやすいように記入しています)
     with_options numericality: { other_than: 0 } do
       validates :scheduled_delivery_id
