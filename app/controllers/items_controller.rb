@@ -1,7 +1,10 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!,except: [:index,:show]
+  # ログインしてなければログイン画面へ飛ばす(必要なため残しています)
   before_action :set_item,only: [:edit,:show,:update]
-  before_action :move_to_index, except: [:index, :show]
+  # 編集詳細では＠itemを準備(必要なため残しています)
+  before_action :move_to_index, except: [:index, :show, :new, :create]
+  # 一覧詳細出品以外(必要なため残しています)
 
   def index
     @items = Item.all.includes(:user).order("created_at ASC")
@@ -47,6 +50,7 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to root_path unless current_user.id == @item.user_id
+    # 出品者以外はトップページへリダイレクト(必要なため残しています)
   end
 
 end
