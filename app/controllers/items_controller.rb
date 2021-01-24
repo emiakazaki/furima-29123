@@ -3,7 +3,7 @@ class ItemsController < ApplicationController
   # ログインしてなければログイン画面へ飛ばす(必要なため残しています)
   before_action :set_item,only: [:edit,:show,:update]
   # 編集詳細では＠itemを準備(必要なため残しています)
-  before_action :move_to_index, except: [:index, :new, :create]
+  before_action :move_to_index, except: [:index, :new, :create, :show]
   # 一覧詳細出品以外(必要なため残しています)
 
   def index
