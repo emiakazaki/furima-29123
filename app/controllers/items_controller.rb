@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!,except: [:index,:show]
   # ログインしてなければログイン画面へ飛ばす(必要なため残しています)
-  before_action :set_item,only: [:edit,:show,:update]
+  before_action :set_item,only: [:edit,:show,:update,:destroy]
   # 編集詳細では＠itemを準備(必要なため残しています)
   before_action :move_to_index, except: [:index, :new, :create, :show]
   # 一覧詳細出品以外(必要なため残しています)
@@ -37,6 +37,15 @@ class ItemsController < ApplicationController
       render :edit
     end
   end
+
+  def destroy
+    if @item.destroy
+      redirect_to root_path
+    else
+      render :edit
+    end
+  end
+
   private
 
   def item_params
