@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
       @order.save  # バリデーションをクリアした時
       return redirect_to root_path
     else
-      render "new"    # バリデーションに弾かれ時
+      render action: :new #バリデーションを弾かれた時
     end
   end
 end

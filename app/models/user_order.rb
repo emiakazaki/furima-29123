@@ -2,6 +2,10 @@ class UserOrder
   include ActiveModel::Model
   attr_accessor : user_id,item_id,postal_code,prefecture_id,municipality,address,building_name,tel
 
+  belongs_to :user
+  belongs_to :item
+  has_one :address
+
   # ここにバリデーションの処理を書く
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, messsgge: "は「-」も入力してください"}
     validates :prefecture_id
