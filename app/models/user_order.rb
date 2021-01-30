@@ -1,20 +1,15 @@
 class UserOrder
   include ActiveModel::Model
-  attr_accessor : user_id,item_id,postal_code,prefecture_id,municipality,address,building_name,tel
-
-  belongs_to :user
-  belongs_to :item
-  has_one :address
+  attr_accessor :user_id,:item_id,:postal_code,:prefecture_id,:municipality,:address,:building_name,:tel
 
   # ここにバリデーションの処理を書く
     validates :postal_code, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, messsgge: "は「-」も入力してください"}
-    validates :prefecture_id
-    validates :municipality
-    validates :address
+    validate :prefecture_id
+    validate :municipality
+    validate :address
     validates :tel, format: {with: /\A[0-9]{3}-[0-9]{4}\z/, messsgge: "は「-」も入力してください"}
-    validates :user_id
-    validates :item_id
-  end
+    validate :user_id
+    validate :item_id
 
   def save
     # 各テーブルにデータを保存する処理を書く

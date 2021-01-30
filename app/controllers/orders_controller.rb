@@ -5,7 +5,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-
     @order = UserOrder.new(order_params)
 
     if @order.valid?
@@ -19,7 +18,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:price)
+    params.permit(:order)
   end
 
 end
