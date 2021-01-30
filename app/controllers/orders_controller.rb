@@ -12,7 +12,14 @@ class OrdersController < ApplicationController
       @order.save
       return redirect_to root_path
     else
-      render action: :new
+      render 'index'
     end
   end
+
+  private
+
+  def order_params
+    params.require(:order).permit(:price)
+  end
+
 end
