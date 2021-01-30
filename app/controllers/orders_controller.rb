@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   
   def index
-    @orders = Order.all
+    @orders = Order.new
   end
 
   def create
@@ -9,10 +9,10 @@ class OrdersController < ApplicationController
     @order = UserOrder.new(order_params)
 
     if @order.valid?
-      @order.save  # バリデーションをクリアした時
+      @order.save
       return redirect_to root_path
     else
-      render action: :new #バリデーションを弾かれた時
+      render action: :new
     end
   end
 end
