@@ -18,7 +18,7 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:order)
+    params.require(:user_order).permit(:hoge) #ここのhogeから作業を行う
   end
 
 end
