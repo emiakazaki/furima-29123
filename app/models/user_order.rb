@@ -1,11 +1,13 @@
 class UserOrder
   include ActiveModel::Model
-  attr_accessor :user_id,:item_id,:postal_code,:prefecture_id,:municipality,:address,:building_name,:tel
+  attr_accessor :user_id,:item_id,:postal_code,:prefecture_id,:municipality,:address,:building_name,:tel,:token
+  validates :token, presence: true
+
 
 #空の投稿を保存できないようにする(わかりやすいように記入しています)
   with_options presence: true do
     validates :postal_code, :municipality, :address, :tel
-#都道府県の選択が「--」の時は保存できないようにする(わかりやすいuseeように記入しています)
+#都道府県の選択が「--」の時は保存できないようにする(わかりやすいように記入しています)
   with_options numericality: { other_than: 0 } do
     validates :prefecture_id
   end
