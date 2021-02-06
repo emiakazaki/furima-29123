@@ -15,6 +15,12 @@ context '商品の購入ができる時' do
 
 context '商品の購入ができない時' do
 
+  it "tokenが空では購入できないこと" do
+    @userorder.token = nil
+    @userorder.valid?
+    expect(@userorder.errors.full_messages).to include("Token can't be blank")
+  end
+
   it "postal_codeが空では購入できないこと" do
     @userorder.postal_code = nil
     @userorder.valid?
