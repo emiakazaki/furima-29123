@@ -1,5 +1,9 @@
 class OrdersController < ApplicationController
-  
+  before_action :authenticate_user!,except: [:index,:create]
+  # ログインしてなければログイン画面へ飛ばす(必要なため残しています)
+  before_action :move_to_index, except: [:index, :create]
+  # 購入以外(必要なため残しています)
+
   def index
     @order = UserOrder.new
     @item = Item.find(params[:item_id])
@@ -29,5 +33,9 @@ class OrdersController < ApplicationController
     params.require(:user_order).permit(:postal_code, :prefecture_id, :municipality,
     :address, :building_name, :tel).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
-
+  
+  def move_to_index
+    redirect_to root_path unless current_user.id == @item.user_id
+    # 出品者以外はトップページへリダイレクト(必要なため残しています)
+  end
 end

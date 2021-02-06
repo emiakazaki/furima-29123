@@ -12,10 +12,8 @@ const pay = () => {
       exp_month: formData.get("user_order[exp_month]"),
       exp_year: `20${formData.get("user_order[exp_year]")}`,
     };
-        console.log(card);
     // トークンを生成する処理
     Payjp.createToken(card, (status, response) => {
-        console.table(response) 
         // 内容を確認する記述
       if (status == 200) {
         const token = response.id;

@@ -63,6 +63,17 @@ context '商品の購入ができない時' do
     expect(@userorder.errors.full_messages).to include("Postal code is invalid")
   end
 
+  it "postal_codeにハイフンがないと購入できないこと" do
+    @userorder.postal_code = "0000000"
+    @userorder.valid?
+    expect(@userorder.errors.full_messages).to include("Postal code is invalid")
+  end
+
+  it "telが空では購入できないこと" do
+    @userorder.tel = nil
+    @userorder.valid?
+    expect(@userorder.errors.full_messages).to include("Tel can't be blank")
+  end
 end
 end
 end
