@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!,only: [:index]
   # 購入ページに遷移する時にログインしてなければログイン画面へ飛ばしたいか判断してくれる(必要なため残しています)
-  before_action :move_to_index,only: [:index]
+  before_action :move_to_index,only: [:index,:create]
   # 購入以外(必要なため残しています)
 
   def index
@@ -35,8 +35,9 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    unless user_signed_in?
-      redirect_to action: :index # ログインしていない場合にはindexアクションが実行(必要なため残しています)
+    @item = Item.find(params[:item_id])
+    if current_user.id == @item.user.id
+      redirect_to root_path  
     end
   end
 end
