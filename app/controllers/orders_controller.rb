@@ -3,15 +3,14 @@ class OrdersController < ApplicationController
   # 購入ページに遷移する時にログインしてなければログイン画面へ飛ばしたいか判断してくれる(必要なため残しています)
   before_action :move_to_index,only: [:index,:create]
   # 購入以外(必要なため残しています)
+  before_action :set_item,only: [:index,:create]
 
   def index
     @order = UserOrder.new
-    @item = Item.find(params[:item_id])
   end
   
   def create
     @order = UserOrder.new(order_params)
-    @item = Item.find(params[:item_id])
 
     if @order.valid?
       Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
@@ -34,10 +33,15 @@ class OrdersController < ApplicationController
     :address, :building_name, :tel).merge(user_id: current_user.id, item_id: params[:item_id],token: params[:token])
   end
 
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
   def move_to_index
     @item = Item.find(params[:item_id])
     if current_user.id == @item.user.id
       redirect_to root_path  
     end
   end
+
 end
