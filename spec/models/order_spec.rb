@@ -83,7 +83,7 @@ context '商品の購入ができない時' do
   end
 
   it "telはハイフン不要で11桁以内でないと購入できないこと" do
-    @userorder.tel = 123456789012
+    @userorder.tel = "123456789012"
     @userorder.valid?
     expect(@userorder.errors.full_messages).to include("Tel にはハイフンなし半角数字のみ入力してください")
   end
