@@ -13,6 +13,12 @@ context '商品の購入ができる時' do
     expect(@userorder).to be_valid
   end
 
+  it "building_nameがなくても購入できる" do
+    @userorder.building_name = ''
+    expect(@userorder).to be_valid
+    end
+  end
+
 context '商品の購入ができない時' do
 
   it "tokenが空では購入できないこと" do
@@ -69,14 +75,24 @@ context '商品の購入ができない時' do
     expect(@userorder.errors.full_messages).to include("Postal code is invalid")
   end
 
-  it "telが空では購入できないこと" do
-    @userorder.tel = nil
+  it "telはハイフン不要で11桁以内でないと購入できないこと" do
+    @userorder.tel = 123456789012
     @userorder.valid?
-    expect(@userorder.errors.full_messages).to include("Tel can't be blank")
+    expect(@userorder.errors.full_messages).to include("Tel にはハイフンなし半角数字のみ入力してください")
+  end
+
+  it "user_idが空だと購入できないこと" do
+    @userorder.user_id = ''
+    @userorder.valid?
+    expect(@userorder.errors.full_messages).to include("User can't be blank")
+  end
+
+  it "item_idが空だと購入できないこと" do
+    @userorder.item_id = ''
+    @userorder.valid?
+    expect(@userorder.errors.full_messages).to include("Item can't be blank")
   end
 end
 end
 end
-end
-
 

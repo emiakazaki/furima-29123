@@ -39,9 +39,8 @@ class OrdersController < ApplicationController
 
   def move_to_index
     @item = Item.find(params[:item_id])
-    if current_user.id == @item.user.id
+    if current_user.id == @item.user.id or @item.order
       redirect_to root_path  
     end
   end
-
 end
